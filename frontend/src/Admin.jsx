@@ -86,6 +86,7 @@ export default function Admin() {
             method: "POST",
             headers: {"Content-Type": "application/json"},
             body: JSON.stringify(form),
+            credentials: "include",
         });
         if(res.ok) {
             setMessage("✅ Org saved successfully!");
