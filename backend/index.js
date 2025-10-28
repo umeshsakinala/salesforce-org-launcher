@@ -60,11 +60,6 @@ app.use(
     })
 );
 
-app.use(express.static(path.join(__dirname, '../frontend/dist')));
-app.get(/.*/, (req, res) => {
-    res.sendFile(path.join(__dirname, '../frontend/dist/index.html'));
-})
-
 app.use((req, res, next) => {
   console.log("Session middleware check:", req.session);
   next();
@@ -242,9 +237,9 @@ app.delete('/api/orgs/:id', async (req, res) => {
 })
 
 app.use(express.static(path.join(__dirname, '../frontend/dist')));
-app.use((req, res) => {
+app.get(/.*/, (req, res) => {
     res.sendFile(path.join(__dirname, '../frontend/dist/index.html'));
-});
+})
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
