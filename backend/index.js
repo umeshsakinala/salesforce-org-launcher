@@ -26,7 +26,7 @@ app.get(/.*/, (req, res) => {
 
 app.use(
   cors({
-    origin: ["http://localhost:5173", "https://salesforce-orgs.netlify.app/"],
+    origin: ["http://localhost:5173", "https://salesforce-orgs.netlify.app"],
     credentials: true,
   })
 );
