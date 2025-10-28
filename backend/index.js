@@ -19,7 +19,6 @@ const app = express();
 const allowedOrigins = [
   "http://localhost:5173",
   "https://salesforce-orgs-launcher.onrender.com",
-  "https://salesforce-org-launcher.onrender.com"
 ];
 
 app.use(
