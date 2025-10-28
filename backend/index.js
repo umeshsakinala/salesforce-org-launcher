@@ -19,6 +19,7 @@ const app = express();
 const allowedOrigins = [
   "http://localhost:5173",
   "https://salesforce-orgs.netlify.app",
+  "https://salesforce-org-launcher.onrender.com"
 ];
 
 app.use(
