@@ -18,7 +18,7 @@ const __dirname = dirname(__filename);
 const app = express();
 const allowedOrigins = [
   "http://localhost:5173",
-  "https://salesforce-orgs.netlify.app",
+  "https://salesforce-orgs-launcher.onrender.com",
   "https://salesforce-org-launcher.onrender.com"
 ];
 
