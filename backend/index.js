@@ -17,13 +17,16 @@ const __dirname = dirname(__filename);
 
 const app = express();
 app.use(express.json());
+app.use(express.static(path.join(__dirname, '../frontend/dist')));
+app.get("*", (req, res) => {
+    res.sendFile(path.join(__dirname, '../frontend/dist/index.html'));
+})
 
 // Seting up Middleware
 
 app.use(
   cors({
     origin: ["http://localhost:5173", "https://salesforce-orgs.netlify.app/"],
-    
     credentials: true,
   })
 );
