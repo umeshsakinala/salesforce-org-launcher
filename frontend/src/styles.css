@@ -1,0 +1,93 @@
+body {
+  font-family: 'Inter', sans-serif;
+  background-color: #f5f6fa;
+  color: #333;
+  margin: 0;
+  padding: 0;
+}
+
+header {
+  background: #1f2937;
+  color: white;
+  padding: 1rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+header h1 {
+  margin: 0;
+  font-size: 1.5rem;
+}
+
+nav button {
+  background: transparent;
+  border: 1px solid #fff;
+  color: #fff;
+  margin-left: 0.5rem;
+  padding: 0.4rem 0.8rem;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+nav button.active {
+  background: #fff;
+  color: #1f2937;
+  font-weight: 600;
+}
+
+main {
+  padding: 2rem;
+}
+
+.org-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1rem;
+}
+
+.org-card {
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  padding: 1rem;
+  text-align: center;
+  transition: transform 0.15s ease;
+}
+
+.org-card button {
+  margin: 0.3rem;
+  background: white;
+  border: 1px solid #2563eb;
+  color: #2563eb;
+  padding: 0.4rem 0.8rem;
+  border-radius: 6px;
+  cursor: pointer;
+
+}
+.org-card button:hover {
+  background-color: #2563eb;
+  color: white;
+}
+
+.org-card:hover {
+  transform: scale(1.03);
+}
+
+.org-card h3 {
+  margin: 0.5rem 0;
+}
+
+/* button {
+  background-color: #2563eb;
+  border: none;
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  cursor: pointer;
+  margin-top: 0.5rem;
+}
+
+button:hover {
+  background-color: #1e40af;
+} */
