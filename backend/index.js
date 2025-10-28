@@ -16,6 +16,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
 const app = express();
+app.set("trust proxy", 1);
 const allowedOrigins = [
   "http://localhost:5173",
   "https://salesforce-orgs-launcher.onrender.com",
@@ -38,13 +39,13 @@ app.use(
     credentials: true,
   })
 );
+app.use(helmet());
+app.use(cookieParser());
 app.use(express.json());
 
 // Seting up Middleware
 
 
-app.use(helmet());
-app.use(cookieParser());
 app.use(
     session({
         secret: process.env.SESSION_SECRET || 'secret',
@@ -64,6 +65,10 @@ app.get(/.*/, (req, res) => {
     res.sendFile(path.join(__dirname, '../frontend/dist/index.html'));
 })
 
+app.use((req, res, next) => {
+  console.log("Session middleware check:", req.session);
+  next();
+});
 
 // Connecting to MongoDB
 mongoose.connect(process.env.MONGODB_URI).then(() => {
