@@ -16,14 +16,6 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
 const app = express();
-app.use(express.json());
-app.use(express.static(path.join(__dirname, '../frontend/dist')));
-app.get(/.*/, (req, res) => {
-    res.sendFile(path.join(__dirname, '../frontend/dist/index.html'));
-})
-
-// Seting up Middleware
-
 const allowedOrigins = [
   "http://localhost:5173",
   "https://salesforce-orgs.netlify.app",
@@ -44,6 +36,14 @@ app.use(
     credentials: true,
   })
 );
+app.use(express.json());
+app.use(express.static(path.join(__dirname, '../frontend/dist')));
+app.get(/.*/, (req, res) => {
+    res.sendFile(path.join(__dirname, '../frontend/dist/index.html'));
+})
+
+// Seting up Middleware
+
 
 app.use(helmet());
 app.use(cookieParser());
@@ -53,9 +53,9 @@ app.use(
         resave: false,
         saveUninitialized: false,
         cookie: {
-            secure: false,
+            secure: true,
             httpOnly: true,
-            sameSite: "lax",
+            sameSite: "none",
             maxAge: 1000 * 60 * 60 * 24,
         },
     })
