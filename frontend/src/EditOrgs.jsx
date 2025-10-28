@@ -18,7 +18,9 @@ export default function EditOrgs() {
                 setOrgs(data);
             }
             catch (err) {
-                toast.error("Failed to load orgs");
+                toast.error("Failed to load orgs", {
+                    position: "top-center",
+                });
             }
             finally {
                 setLoading(false);
@@ -36,7 +38,9 @@ export default function EditOrgs() {
             setForm({ username: data.username, password: data.password });
         }
         catch(err) {
-            toast.error("Could not load credentials for editing");
+            toast.error("Could not load credentials for editing", {
+                position: "top-center",
+            });
         }
     };
 
@@ -49,12 +53,16 @@ export default function EditOrgs() {
                 credentials: "include",
             });
             if(!res.ok) throw new Error("Failed to save org");
-            toast.success("Org updated Succesfully");;
+            toast.success("Org updated Succesfully", {
+                position: "top-center",
+            });
             setEditing(null);
             setOrgs((prev) => prev.map((org) => (org._id === id ? { ...org, ...form } : org)));
         }
         catch(error) {
-            toast.error("Failed to save org");
+            toast.error("Failed to save org", {
+                position: "top-center",
+            });
         }
     };
 
@@ -75,11 +83,15 @@ export default function EditOrgs() {
                 credentials: "include",
             });
             if(!res.ok) throw new Error("Failed to delete org");
-            toast.success("Org deleted successfully");
+            toast.success("Org deleted successfully", {
+                position: "top-center",
+            });
             setOrgs((prev) => prev.filter((org) => org._id !== id));
         }
         catch(error) {
-            toast.error("Failed to delete org");
+            toast.error("Failed to delete org", {
+                position: "top-center",
+            });
         }
     }
 
