@@ -5,10 +5,11 @@ export default function OrgGrid() {
     const [orgs, setOrgs] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState("");
+    const API_BASE = import.meta.env.VITE_API_BASE || "";
     useEffect(() => {
         const fetchOrgs = async () => {
         try {
-            const res = await fetch("/api/orgs", {
+            const res = await fetch(`${API_BASE}/api/orgs`, {
                 credentials: "include"
             });
             if(!res.ok) throw new Error("Failed to fetch orgs");
@@ -32,7 +33,7 @@ export default function OrgGrid() {
 
     const handleLaunch = async (id) => {
         try {
-            const res = await fetch(`/api/orgs/${id}/creds`, { credentials: "include" });
+            const res = await fetch(`${API_BASE}/api/orgs/${id}/creds`, { credentials: "include" });
             if(!res.ok) throw new Error("Failed to fetch credentials");
             const { username, password, salesforce_url } = await res.json();
             //const textToCopy = `Username: ${username}\nPassword: ${password}`;
@@ -54,7 +55,7 @@ export default function OrgGrid() {
     };
 
     const copyField = async (id, field) => {
-        const res = await fetch(`/api/orgs/${id}/creds`, { credentials: "include" });
+        const res = await fetch(`${API_BASE}/api/orgs/${id}/creds`, { credentials: "include" });
         const data = await res.json();
         await navigator.clipboard.writeText(data[field]);
         toast.success(`${field} copied to clipboard!`);

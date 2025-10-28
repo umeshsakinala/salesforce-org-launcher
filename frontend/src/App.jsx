@@ -12,11 +12,11 @@ export default function App() {
   const [view, setView] = useState("orgs");
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [checkingAuth, setCheckingAuth] = useState(true);
-
+  const API_BASE = import.meta.env.VITE_API_BASE || "";
   useEffect(() => {
     const checkAuth = async () => {
       try {
-        const res = await fetch("/api/check-auth", { credentials: "include" });
+        const res = await fetch(`${API_BASE}/api/check-auth`, { credentials: "include" });
         const data = await res.json();
         setIsLoggedIn(data.authenticated);
       }

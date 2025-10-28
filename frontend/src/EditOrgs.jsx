@@ -8,11 +8,12 @@ export default function EditOrgs() {
     const [loading, setLoading] = useState(true);
     const [editing, setEditing] = useState(null);
     const [form, setForm] = useState({ username: "", password: "" });
+    const API_BASE = import.meta.env.VITE_API_BASE || "";
 
     useEffect(() => {
         const fetchOrgs = async () => {
             try {
-                const res = await fetch("/api/orgs", { credentials: "include" });
+                const res = await fetch(`${API_BASE}/api/orgs`, { credentials: "include" });
                 const data = await res.json();
                 setOrgs(data);
             }
@@ -29,7 +30,7 @@ export default function EditOrgs() {
     const handleEdit = async (org) => {
         setEditing(org._id);
         try {
-            const res = await fetch(`/api/orgs/${org._id}/creds`, { credentials: "include" });
+            const res = await fetch(`${API_BASE}/api/orgs/${org._id}/creds`, { credentials: "include" });
             if(!res.ok) throw new Error("Failed to fetch credentials");
             const data = await res.json();
             setForm({ username: data.username, password: data.password });
@@ -41,7 +42,7 @@ export default function EditOrgs() {
 
     const handleSave = async(id) => {
         try {
-            const res = await fetch(`/api/orgs/${id}`, {
+            const res = await fetch(`${API_BASE}/api/orgs/${id}`, {
                 method: "PUT",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(form),
@@ -69,7 +70,7 @@ export default function EditOrgs() {
                 confirmButtonText: "Yes, delete it!",
             });
             if(!result.isConfirmed) return;
-            const res = await fetch(`/api/orgs/${id}`, {
+            const res = await fetch(`${API_BASE}/api/orgs/${id}`, {
                 method: "DELETE",
                 credentials: "include",
             });

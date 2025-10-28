@@ -4,6 +4,7 @@ import "./Admin.css";
 
 export default function Admin() {
     // const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const API_BASE = import.meta.env.VITE_API_BASE || "";
     const { isLoggedIn, setIsLoggedIn, checkingAuth } = useAuth();
     const [password, setPassword] = useState("");
     const [form, setForm] = useState({
@@ -48,7 +49,7 @@ export default function Admin() {
         return () => document.removeEventListener("mousedown", handleClickOutside);
     }, []);
     const login = async () => {
-        const res = await fetch("/api/login", {
+        const res = await fetch(`${API_BASE}/api/login`, {
             method: "POST",
             headers: {"Content-Type": "application/json"},
             body: JSON.stringify({password}),
@@ -57,7 +58,7 @@ export default function Admin() {
         if(res.ok) {
             setIsLoggedIn(true);
             setMessage("");
-            await fetch("/api/check-auth", { credentials: "include" });
+            await fetch(`${API_BASE}/api/check-auth`, { credentials: "include" });
         }
         else {
             setMessage("Login Failed");
@@ -81,7 +82,7 @@ export default function Admin() {
     const saveOrg = async () => {
         setMessage("");
         if(!validateForm()) return;
-        const res = await fetch("/api/orgs", {
+        const res = await fetch(`${API_BASE}/api/orgs`, {
             method: "POST",
             headers: {"Content-Type": "application/json"},
             body: JSON.stringify(form),
