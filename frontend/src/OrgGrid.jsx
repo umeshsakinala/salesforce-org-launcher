@@ -62,6 +62,21 @@ export default function OrgGrid() {
         // alert(` ${field} copied to clipboard!`);
     };
 
+    if(loading) {
+        return (
+            <div className="org-grid loading-state">
+                <p>Loading orgs...</p>
+            </div>
+        );
+    }
+
+    if(error) {
+        return (
+            <div className="org-grid error-state">
+                <p>{error}</p>
+            </div>
+        );
+    }
 
     return (
         <div className="org-grid">
