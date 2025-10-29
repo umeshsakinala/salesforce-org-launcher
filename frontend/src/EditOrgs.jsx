@@ -95,12 +95,19 @@ export default function EditOrgs() {
         }
     }
 
-    if(loading) return <div>Loading Orgs</div>;
+    if(loading) {
+        return (
+            <div className="edit-orgs-wrapper">
+                <div className="loading">Loading Orgs...</div>
+            </div>
+        );
+    }
+
     return (
         <div className="edit-orgs-wrapper">
-            {loading ? (
-                <div className="loading">Loading Orgs...</div>
-            ): (
+            {orgs.length === 0 ? (
+                <div className="loading">No Orgs Found. Add some from the Admin Panel.</div>
+            ) : (
                 <div className="org-grid">
                     {orgs.map((org) => (
                         <div className="org-card" key={org._id}>
