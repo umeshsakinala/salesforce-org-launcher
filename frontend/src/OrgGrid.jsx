@@ -78,11 +78,17 @@ export default function OrgGrid() {
         );
     }
 
+    if (!loading && orgs.length === 0) {
+        return (
+            <div className="org-grid empty-state">
+                <p>No Orgs Found. Add some from the Admin Panel.</p>
+            </div>
+        );
+    }
+
     return (
         <div className="org-grid">
-            {orgs.length === 0 ? (
-                <p>No Orgs Found. Add some from the Admin Panel</p>
-            ) : (
+            {
                 orgs.map((org) => {
                     return(
                         <div key={org._id} className="org-card">
@@ -94,7 +100,7 @@ export default function OrgGrid() {
                         </div>
                     );
                 })
-            )}
+            }
         </div>
     )
 }
